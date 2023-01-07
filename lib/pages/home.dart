@@ -1,6 +1,9 @@
 // import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:quizer/data/data.dart';
+import 'package:quizer/data/question_module.dart';
+import 'package:quizer/widget/column.dart';
+import 'package:quizer/widget/row.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,6 +13,33 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  gettrue2() {
+    if (now + 1 == all) {
+    } else {
+      if (questionbank[now].realanswer) {
+        setState(
+          () {
+            icons.add(
+              const Icon(Icons.check, color: Colors.green),
+            );
+            now++;
+          },
+        );
+      } else {
+        setState(
+          () {
+            icons.add(
+              const Icon(Icons.close, color: Colors.red),
+            );
+            now++;
+          },
+        );
+      }
+    }
+  }
+
+  getfalse2() {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                 child: Container(
               alignment: Alignment.center,
               child: Text(
-                questions[now],
+                questionbank[now].realquestion,
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,
@@ -83,150 +113,12 @@ class _HomePageState extends State<HomePage> {
             )),
             Expanded(
               child: switch1 == false
-                  ? Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(17.0),
-                          child: GestureDetector(
-                            onTap: () {
-                              if (now + 1 == all) {
-                              } else {
-                                setState(() {
-                                  icons.add(
-                                    const Icon(Icons.check,
-                                        color: Colors.green),
-                                  );
-                                  now++;
-                                });
-                              }
-                            },
-                            child: Container(
-                              height: 75,
-                              width: double.infinity,
-                              alignment: Alignment.center,
-                              color: Colors.green,
-                              child: const Text(
-                                "TRUE",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            bottom: 10,
-                            right: 17,
-                            left: 17,
-                          ),
-                          child: GestureDetector(
-                            onTap: () {
-                              stateanswer = false;
-                              if (now  == all) {
-                              } else {
-                                if (answers[now]) {
-                                  setState(
-                                    () {
-                                      icons.add(
-                                        const Icon(Icons.close,
-                                            color: Colors.red),
-                                      );
-                                      now++;
-                                    },
-                                  );
-                                } else {
-                                  setState(
-                                    () {
-                                      icons.add(
-                                        const Icon(Icons.check,
-                                            color: Colors.green),
-                                      );
-                                      now++;
-                                    },
-                                  );
-                                }
-                              }
-                            },
-                            child: Container(
-                              width: double.infinity,
-                              height: 75,
-                              alignment: Alignment.center,
-                              color: Colors.red,
-                              child: const Text(
-                                "FALSE",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    )
-                  : Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            if (now + 1 == all) {
-                            } else {
-                              setState(() {
-                                icons.add(
-                                  const Icon(Icons.check, color: Colors.green),
-                                );
-                                now++;
-                              });
-                            }
-                          },
-                          child: const CircleAvatar(
-                            radius: 35,
-                            backgroundColor: Colors.green,
-                            child: Icon(
-                              Icons.check,
-                              size: 35,
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            if (now + 1 == all) {
-                              // await AwesomeDialog(
-                              //   context: context,
-                              //   dialogType: DialogType.success,
-                              //   title: 'title',
-                              //   closeIcon: Icon(Icons.close),
-                              // ).show();
-                            } else {
-                              setState(() {
-                                icons.add(
-                                  const Icon(Icons.close, color: Colors.red),
-                                );
-                                now++;
-                              });
-                            }
-                          },
-                          child: const CircleAvatar(
-                            radius: 35,
-                            backgroundColor: Colors.red,
-                            child: Icon(
-                              Icons.close,
-                              size: 35,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
+                  ? getcolumn(st1: gettrue2, st2: getfalse2)
+                  : getrow(st1: gettrue2, st2: getfalse2),
             ),
             SizedBox(
               height: 30,
-              child: Row(
+              child: ListView(
                 children: icons,
               ),
             ),
