@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:quizer/data/data.dart';
 import 'package:quizer/data/question_module.dart';
-import 'package:quizer/widget/column.dart';
-import 'package:quizer/widget/row.dart';
+import 'package:quizer/ui/widget/column.dart';
+import 'package:quizer/ui/widget/row.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,10 +13,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  gettrue2() {
+  gettrue() {
     if (now + 1 == all) {
     } else {
-      if (questionbank[now].realanswer) {
+      if (questionbank[now].realanswer == true) {
         setState(
           () {
             icons.add(
@@ -38,7 +38,30 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  getfalse2() {}
+  getfalse2() {
+     if (now + 1 == all) {
+    } else {
+      if (questionbank[now].realanswer == false) {
+        setState(
+          () {
+            icons.add(
+              const Icon(Icons.check, color: Colors.green),
+            );
+            now++;
+          },
+        );
+      } else {
+        setState(
+          () {
+            icons.add(
+              const Icon(Icons.close, color: Colors.red),
+            );
+            now++;
+          },
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -113,8 +136,8 @@ class _HomePageState extends State<HomePage> {
             )),
             Expanded(
               child: switch1 == false
-                  ? getcolumn(st1: gettrue2, st2: getfalse2)
-                  : getrow(st1: gettrue2, st2: getfalse2),
+                  ? getcolumn(st1: gettrue, st2: getfalse2)
+                  : getrow(st1: gettrue, st2: getfalse2),
             ),
             SizedBox(
               height: 30,

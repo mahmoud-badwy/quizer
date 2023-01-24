@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quizer/pages/home.dart';
+import 'package:quizer/ui/pages/home.dart';
 
 void main() {
   runApp(const Quizer());
