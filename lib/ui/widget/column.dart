@@ -7,7 +7,9 @@ Column getcolumn({required VoidCallback st1, required VoidCallback st2}) {
       Padding(
         padding: const EdgeInsets.all(17.0),
         child: GestureDetector(
-          onTap: st1,
+          onTap: () {
+            st1();
+          },
           child: Container(
             height: 75,
             width: double.infinity,
@@ -31,7 +33,9 @@ Column getcolumn({required VoidCallback st1, required VoidCallback st2}) {
           left: 17,
         ),
         child: GestureDetector(
-          onTap: st1,
+          onTap: () {
+            st2();
+          },
           child: Container(
             width: double.infinity,
             height: 75,
