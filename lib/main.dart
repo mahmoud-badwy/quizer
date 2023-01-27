@@ -4,6 +4,7 @@ import 'package:quizer/ui/pages/home.dart';
 void main() {
   runApp(const Quizer());
 }
+
 class Quizer extends StatelessWidget {
   const Quizer({super.key});
 
@@ -11,7 +12,7 @@ class Quizer extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:  HomePage() ,
+      home: HomePage(),
     );
   }
 }

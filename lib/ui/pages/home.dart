@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:quizer/data/data.dart';
 import 'package:quizer/data/modules/logic.dart';
 import 'package:quizer/data/question_module.dart';
+import 'package:quizer/ui/pages/show_result.dart';
 import 'package:quizer/ui/widget/column.dart';
 import 'package:quizer/ui/widget/row.dart';
 
@@ -20,6 +21,7 @@ class _HomePageState extends State<HomePage> {
   gettrue() {
     if (now + 1 == all) {
       if (questionbank[now].realanswer == false) {
+        useranswers.add(true);
         setState(
           () {
             icons.add(
@@ -41,16 +43,29 @@ class _HomePageState extends State<HomePage> {
         title: 'Succed',
         bodytext: 'You are finnish all questions.',
         button1: 'show result',
-        button2: 'cancle',
+        button2: 'cancel',
         button1f: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ShowResult(
+                      all: all.toDouble(),
+                      result: useranswersc.toDouble(),
+                    )),
+          );
+        },
+        button2f: () {
           setState(() {
             now = 0;
             icons.clear();
+            Navigator.of(context).pop();
           });
         },
+        button3: 'reset progress',
       );
     } else {
       if (questionbank[now].realanswer == true) {
+        useranswers.add(true);
         setState(
           () {
             icons.add(
@@ -75,6 +90,7 @@ class _HomePageState extends State<HomePage> {
   getfalse2() {
     if (now + 1 == all) {
       if (questionbank[now].realanswer == false) {
+        useranswers.add(true);
         setState(
           () {
             icons.add(
@@ -91,16 +107,35 @@ class _HomePageState extends State<HomePage> {
           },
         );
       }
+
       myanswerdialog.showMyDialog(
         conu: context,
         title: 'Succed',
         bodytext: 'You are finnish all questions.',
         button1: 'show result',
-        button2: 'cancle',
-        button1f: () {},
+        button2: 'cancel',
+        button1f: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ShowResult(
+                      all: all.toDouble(),
+                      result: useranswersc.toDouble(),
+                    )),
+          );
+        },
+        button2f: () {
+          setState(() {
+            now = 0;
+            icons.clear();
+            Navigator.of(context).pop();
+          });
+        },
+        button3: 'reset progress',
       );
     } else {
       if (questionbank[now].realanswer == false) {
+        useranswers.add(true);
         setState(
           () {
             icons.add(
@@ -159,16 +194,17 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             onPressed: () {
-              resetdata.showMyDialog(
+              resetdata.showMyDialog2(
                 conu: context,
                 title: 'reset your progress',
                 bodytext: 'Are you sure ?',
                 button1: 'reset my progress',
-                button2: 'cancle',
+                button2: 'cancel',
                 button1f: () {
                   setState(() {
                     now = 0;
                     icons.clear();
+                    Navigator.of(context).pop();
                   });
                 },
               );
@@ -224,47 +260,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-
-
-/*
-Future<void> showMyDialog(
-    {required BuildContext con,
-    required String title,
-    required String bodytext,
-    required String button}) async {
-  return showDialog<void>(
-    context: con,
-    barrierDismissible: false, // user must tap button!
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text(title),
-        content: SingleChildScrollView(
-          child: ListBody(
-            children: <Widget>[
-              Text(bodytext),
-            ],
-          ),
-        ),
-        actions: <Widget>[
-          TextButton(
-            child: Text(button),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-          const SizedBox(
-            width: 100,
-          ),
-          TextButton(
-            child: Text(button),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      );
-    },
-  );
-}
- */
