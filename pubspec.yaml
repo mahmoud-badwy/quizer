@@ -27,8 +27,8 @@ flutter_icons:
 
 flutter:
   uses-material-design: true
-  # assets:
-  #   - assets/icons/play_store_512.png
+assets:
+  - assets/icons/icon.png
   #   - images/a_dot_ham.jpeg
 
   # fonts:
