@@ -20,8 +20,9 @@ class _HomePageState extends State<HomePage> {
 
   gettrue() {
     if (now + 1 == all) {
-      if (questionbank[now].realanswer == false) {
+      if (questionbank[now].realanswer == true) {
         useranswers.add(true);
+        useranswersc = useranswers.length;
         setState(
           () {
             icons.add(
@@ -59,6 +60,9 @@ class _HomePageState extends State<HomePage> {
           setState(() {
             now = 0;
             icons.clear();
+            useranswers.clear();
+            useranswersc = 0;
+
             Navigator.of(context).pop();
           });
         },
@@ -67,6 +71,7 @@ class _HomePageState extends State<HomePage> {
     } else {
       if (questionbank[now].realanswer == true) {
         useranswers.add(true);
+        useranswersc = useranswers.length;
         setState(
           () {
             icons.add(
@@ -92,6 +97,7 @@ class _HomePageState extends State<HomePage> {
     if (now + 1 == all) {
       if (questionbank[now].realanswer == false) {
         useranswers.add(true);
+        useranswersc = useranswers.length;
         setState(
           () {
             icons.add(
@@ -130,6 +136,8 @@ class _HomePageState extends State<HomePage> {
           setState(() {
             now = 0;
             icons.clear();
+            useranswers.clear();
+            useranswersc = 0;
             Navigator.of(context).pop();
           });
         },
@@ -138,6 +146,7 @@ class _HomePageState extends State<HomePage> {
     } else {
       if (questionbank[now].realanswer == false) {
         useranswers.add(true);
+        useranswersc = useranswers.length;
         setState(
           () {
             icons.add(
@@ -206,6 +215,8 @@ class _HomePageState extends State<HomePage> {
                   setState(() {
                     now = 0;
                     icons.clear();
+                    useranswers.clear();
+                    useranswersc = 0;
                     Navigator.of(context).pop();
                   });
                 },
