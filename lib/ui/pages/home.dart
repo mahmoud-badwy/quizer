@@ -48,10 +48,11 @@ class _HomePageState extends State<HomePage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => ShowResult(
-                      all: all.toDouble(),
-                      result: useranswersc.toDouble(),
-                    )),
+              builder: (context) => ShowResult(
+                all: all.toDouble(),
+                result: useranswersc.toDouble(),
+              ),
+            ),
           );
         },
         button2f: () {
@@ -118,10 +119,11 @@ class _HomePageState extends State<HomePage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => ShowResult(
-                      all: all.toDouble(),
-                      result: useranswersc.toDouble(),
-                    )),
+              builder: (context) => ShowResult(
+                all: all.toDouble(),
+                result: useranswersc.toDouble(),
+              ),
+            ),
           );
         },
         button2f: () {
